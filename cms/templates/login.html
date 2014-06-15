@@ -25,7 +25,9 @@ from django.utils.translation import ugettext as _
   <section class="content">
     <header>
       <h1 class="title title-1">登录校盾计划工作平台</h1>
+      <!--
       <a href="${reverse('signup')}" class="action action-signin">如果还没有校盾平台帐号,现在注册?</a>
+      -->
     </header>
 
     <article class="content-primary" role="main">
@@ -44,6 +46,11 @@ from django.utils.translation import ugettext as _
               <!--<a href="${forgot_password_link}" class="action action-forgotpassword" tabindex="-1">${_("Forgot password?")}</a>-->
               <label for="password">${_("Password")}</label>
               <input id="password" type="password" name="password" />
+            </li>
+
+            <li class="field text required" id="field-captcha">
+              <label for='captcha'>验证码</label>
+              ${ form }
             </li>
           </ol>
         </fieldset>
@@ -104,10 +111,25 @@ require(["jquery", "jquery.cookie", "utility"], function($) {
         } else {
           $('#login_error').stop().addClass('is-shown');
           $('#login_error').html(json.value);
+          refreshCaptcha();
         }
       }
     );
   });
+
+  //refresh captcha
+  $('.captcha').click(function(){
+    refreshCaptcha();
+  });
+
+  function refreshCaptcha(){
+    $.get("/signin", function(json){
+       var captcha_image_url = json.captcha_image_url;
+       $('.captcha').attr("src", captcha_image_url);
+       $('#id_captcha_0').attr("value", captcha_image_url.split('/')[3]);
+    });
+    return false;
+  }
 });
 </script>
 </%block>

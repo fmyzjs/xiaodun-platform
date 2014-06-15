@@ -250,6 +250,25 @@
       margin: 0;
       padding: 0;
       list-style: none;
+
+      li#field-captcha {
+        label[for=id_captcha_1] {
+          display: none;
+        }
+
+        img.captcha {
+          float: right;
+          width: 15%;
+          margin: 0 2.5%;
+          height: 43px;
+        }
+
+        input#id_captcha_1 {
+          float: right;
+          width: 80%;
+        }
+      }
+
     }
 
     // field groups
@@ -413,6 +432,43 @@
           margin-left: ($baseline/4);
           content: "*";
         }
+      }
+    }
+
+    .field#field-password {
+      .pw-strength {
+          background-color: #FFD099;
+          height: 30px;
+          margin-top: 3px;
+          overflow: hidden;
+          position: relative;
+          width: 303px;
+      }
+
+      .pw-bar {
+          background-color: #FF6600;
+          height: 30px;
+          overflow: hidden;
+          transition: all 0.4s linear 0s;
+          width: 0px;
+      }
+
+      .pw-letter {
+          left: 0;
+          position: absolute;
+          top: 0;
+      }
+
+      .pw-strength span {
+          border-right: 1px solid #FFFFFF;
+          color: #FFFFFF;
+          display: inline;
+          float: left;
+          font-size: 12px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          width: 100px;
       }
     }
   }
